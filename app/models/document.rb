@@ -21,4 +21,16 @@ class Document
     puts "Saving document: #{@title}"
     notify_observers(:document_saved, { title: @title, content: @content })
   end
+
+  def set_export_strategy(strategy)
+    @export_strategy = strategy
+  end
+
+  def export
+    if @export_strategy
+      @export_strategy.export(self)
+    else
+      puts "Nessuna strategia di esportazione impostata."
+    end
+  end
 end

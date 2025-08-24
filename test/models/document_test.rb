@@ -44,4 +44,15 @@ class DocumentTest < ActiveSupport::TestCase
       logger_service.verify
     end
   end
+
+  test "adding export strategy" do
+    export_strategy = Minitest::Mock.new
+
+    export_strategy.expect(:export, nil, [ @doc ])
+
+    @doc.set_export_strategy(export_strategy)
+    @doc.export
+
+    export_strategy.verify
+  end
 end
